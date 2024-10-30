@@ -3,6 +3,11 @@ import { assets } from "../assets/assets"
 import axios from "axios"
 import {backendUrl} from "../App/"
 import PropTypes from 'prop-types';
+import https from 'https';
+
+const agent = new https.Agent({  
+  rejectUnauthorized: false  // For testing only; not secure for production
+});
 
 const Add = ({token}) => {
   const[image1,setImage1] = useState(false)
@@ -35,7 +40,7 @@ const Add = ({token}) => {
       image3 && formData.append("image3",image3)
       image4 && formData.append("image4",image4)
 
-      const response = await axios.post(backendUrl + "/api/product/add",formData,{headers:{token}})
+      const response = await axios.post(backendUrl, { httpsAgent: agent } + "/api/product/add",formData,{headers:{token}})
       console.log(response.data);
     }
     catch(error){
