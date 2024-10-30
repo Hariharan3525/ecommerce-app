@@ -7,11 +7,10 @@ import userRouter from './routes/userRoute.js'
 import productRouter from './routes/productRoute.js'
 
 const corsOptions = {
-    origin: 'https://ecommerce-app-admin-6efb.onrender.com', // Replace with your frontend URL
+    origin: 'https://ecommerce-app-admin-6efb.onrender.com',
     optionsSuccessStatus: 200
 };
 
-app.use(cors(corsOptions));
 
 // App Config
 const app = express()
@@ -21,6 +20,7 @@ connectCloudinary()
 
 // Middlewares
 app.use(express.json())
+app.use(cors(corsOptions));
 app.use(cors())
 
 // Api endpoints
